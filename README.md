@@ -38,3 +38,13 @@ https://github.com/<owner>/<repo> --skill <skill-name>
 ```
 
 然后运行 `bash update-skills.sh` 即可。
+
+## 已知问题
+
+- **大型仓库可能克隆超时**（如含大量 demo 资源的 Skill）。脚本已设置 600s 超时，若仍失败，可手动浅克隆后本地安装：
+
+  ```bash
+  git clone --depth 1 https://github.com/<owner>/<repo>.git /tmp/<name>
+  npx skills add /tmp/<name> --skill <name> -g -y
+  rm -rf /tmp/<name>
+  ```
