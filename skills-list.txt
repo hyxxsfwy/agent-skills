@@ -1,0 +1,8 @@
+# PPT — 归藏 · 横向翻页网页PPT（电子杂志 × 电子墨水 / 瑞士国际主义）
+https://github.com/op7418/guizang-ppt-skill --skill guizang-ppt-skill
+
+# Design — 花叔 · HTML高保真原型 / 交互Demo / 动画 / 设计方向顾问
+https://github.com/alchaincyf/huashu-design --skill huashu-design
+
+# Search — Vercel · Skills.sh 生态发现与安装（元 Skill）
+https://github.com/vercel-labs/skills --skill find-skills
