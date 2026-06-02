@@ -12,6 +12,24 @@ if [ ! -f "$LIST_FILE" ]; then
     exit 1
 fi
 
+# -- 将 skill 软链接到各 Agent 的 skills 目录 --
+symlink_skill() {
+    local skill="$1"
+    local src="$HOME/.agents/skills/$skill"
+    local dirs=(
+        "$HOME/.claude/skills"
+        "$HOME/.codex/skills"
+        "$HOME/.openclaw/skills"
+    )
+    for dest_dir in "${dirs[@]}"; do
+        mkdir -p "$dest_dir"
+        # 计算相对路径，使链接可移植
+        local rel
+        rel=$(realpath --relative-to="$dest_dir" "$src" 2>/dev/null) || continue
+        ln -sfn "$rel" "$dest_dir/$skill"
+    done
+}
+
 echo "=============================================="
 echo "  Agent Skills 更新"
 echo "=============================================="
@@ -42,7 +60,8 @@ while IFS= read -r args; do
 
     echo "  → 安装最新版"
     if SKILLS_CLONE_TIMEOUT_MS=600000 npx skills add $args -g -y </dev/null; then
-        echo "  ✅ 成功"
+        echo "  ✅ 安装成功"
+        [ -n "$skill" ] && symlink_skill "$skill"
     else
         echo "  ❌ 安装失败（网络问题？可重试）"
         fail_count=$((fail_count + 1))

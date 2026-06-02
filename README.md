@@ -2,6 +2,34 @@
 
 统一管理所有 Agent Skill 的来源、安装参数，换电脑 / 重装 WSL / 迁移环境时一键恢复。
 
+## skills-list.txt 格式规范
+
+每行一条完整可重放命令，格式：
+
+```text
+# <分类> — <作者/来源> · <一句话描述>
+<github-url> --skill <skill-name>
+```
+
+规则：
+
+| 规则 | 说明 |
+|------|------|
+| `#` 开头 | 注释行，说明分类和来源，脚本自动跳过 |
+| 空行 | 忽略，可用来分组 |
+| 命令格式 | `npx skills add <url> --skill <name>` 的尾部参数部分 |
+| 不加 `-g -y` | 全局安装和静默参数由脚本统一注入，清单只管来源 |
+
+示例：
+
+```text
+# PPT — 归藏 · 横向翻页网页PPT
+https://github.com/op7418/guizang-ppt-skill --skill guizang-ppt-skill
+
+# Design — 花叔 · HTML 高保真原型
+https://github.com/alchaincyf/huashu-design --skill huashu-design
+```
+
 ## 文件说明
 
 | 文件 | 用途 |
